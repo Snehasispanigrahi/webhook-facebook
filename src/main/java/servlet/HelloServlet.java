@@ -20,7 +20,7 @@ public class HelloServlet extends HttpServlet {
 //		ServletOutputStream out = resp.getOutputStream();
 		PrintWriter out = resp.getWriter();
 		if(token == "abc123")
-			out.println("value: " + value);
+			out.println(value);
 		
 		out.flush();
 		out.close();
