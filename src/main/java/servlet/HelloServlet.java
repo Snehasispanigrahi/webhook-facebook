@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -19,16 +18,11 @@ public class HelloServlet extends HttpServlet {
 		String token = "hub.verify_token";
 		String value = req.getParameter(challenge);
 		ServletOutputStream out = resp.getOutputStream();
-		Enumeration<String> parameterNames = req.getParameterNames();
-		while(parameterNames != null && parameterNames.hasMoreElements()){
-			System.out.println("para: "+parameterNames.nextElement());
-		}
-		System.out.println("challenge: "+value);
-		System.out.println("token: "+token);
 //		PrintWriter out = resp.getWriter();
-		if(token.equals("abc123"))
-			out.println(value);
-		
+		if(token.equals("abc123")){
+			out.write(value.getBytes());
+			System.out.println("challenge: "+value);
+		}
 		out.flush();
 		out.close();
 	}
