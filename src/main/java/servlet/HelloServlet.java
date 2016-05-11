@@ -14,11 +14,12 @@ public class HelloServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String name = "hub.challenge";
-		String value = "";
-		value = req.getParameter("name");
+		String challenge = "hub.challenge";
+		String token = "hub.verify_token";
+		String value = req.getParameter("challenge");
 		ServletOutputStream out = resp.getOutputStream();
-		out.println("value: " + value);
+		if(token == "abc123")
+			out.println("value: " + value);
 		out.flush();
 		out.close();
 	}
