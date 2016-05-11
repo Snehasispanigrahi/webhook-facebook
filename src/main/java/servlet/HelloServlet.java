@@ -1,9 +1,9 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,10 +17,10 @@ public class HelloServlet extends HttpServlet {
 		String challenge = "hub.challenge";
 		String token = "hub.verify_token";
 		String value = req.getParameter(challenge);
-//		ServletOutputStream out = resp.getOutputStream();
+		ServletOutputStream out = resp.getOutputStream();
 		System.out.println("challenge: "+challenge);
 		System.out.println("token: "+token);
-		PrintWriter out = resp.getWriter();
+//		PrintWriter out = resp.getWriter();
 		if(token == "abc123")
 			out.println(value);
 		
