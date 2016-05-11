@@ -18,6 +18,8 @@ public class HelloServlet extends HttpServlet {
 		String token = "hub.verify_token";
 		String value = req.getParameter(challenge);
 //		ServletOutputStream out = resp.getOutputStream();
+		System.out.println("challenge: "+challenge);
+		System.out.println("token: "+token);
 		PrintWriter out = resp.getWriter();
 		if(token == "abc123")
 			out.println(value);
