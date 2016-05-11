@@ -37,7 +37,7 @@
 	  
 		// Only works after `FB.init` is called
 		function myFacebookLogin() {
-		  FB.login(function(){
+		  FB.login(function(response){
 			  console.log("Successfully Loggedin", response);
 			  FB.api('/me/accounts',function(response){
 				  console.log("Successfully retireved pages", response);
