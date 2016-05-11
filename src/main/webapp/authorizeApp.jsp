@@ -24,9 +24,9 @@
 	     fjs.parentNode.insertBefore(js, fjs);
 	   }(document, 'script', 'facebook-jssdk'));
 	  
-	  function subscribeApp(page.id, page.access_token){
-		  console.log("Subscribing to the page : "+page.id);
-		  FB.api('/' + page.id + 'subscribed_apps', 
+	  function subscribeApp(page_id, page_access_token){
+		  console.log("Subscribing to the page : "+page_id);
+		  FB.api('/' + page_id + 'subscribed_apps', 
 				  'post',
 				  {access_token: page_access_token},
 				  function(response)){
@@ -39,7 +39,7 @@
 		function myFacebookLogin() {
 		  FB.login(function(){
 			  console.log("Successfully Loggedin", response);
-			  FB.api('/me/accounts'function(response){
+			  FB.api('/me/accounts',function(response){
 				  console.log("Successfully retireved pages", response);
 				  var pages = response.data;
 				  var ul = document.getElementById("list");
