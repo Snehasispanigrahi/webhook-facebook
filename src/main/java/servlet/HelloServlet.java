@@ -9,21 +9,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(
-        name = "MyServlet", 
-        urlPatterns = {"/webhook"}
-    )
+@WebServlet(name = "MyServlet", urlPatterns = { "/webhook" })
 public class HelloServlet extends HttpServlet {
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-	String name = "hub.challenge";
-	String value = req.getParameter("name");
-        ServletOutputStream out = resp.getOutputStream();
-        out.write("hello heroku: value"+value);
-        out.flush();
-        out.close();
-    }
-    
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String name = "hub.challenge";
+		String value = "";
+		value = req.getParameter("name");
+		ServletOutputStream out = resp.getOutputStream();
+		out.println("value: " + value);
+		out.flush();
+		out.close();
+	}
+
 }
