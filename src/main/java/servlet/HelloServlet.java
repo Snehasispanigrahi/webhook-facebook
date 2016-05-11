@@ -16,12 +16,13 @@ public class HelloServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String challenge = "hub.challenge";
 		String token = "hub.verify_token";
-		String value = req.getParameter(challenge);
+		String challengeValue = req.getParameter(challenge);
+		String tokenValue = req.getParameter(token);
 		ServletOutputStream out = resp.getOutputStream();
 //		PrintWriter out = resp.getWriter();
-		if(token.equals("abc123")){
-			out.write(value.getBytes());
-			System.out.println("challenge: "+value);
+		if(tokenValue.equals("abc123")){
+			out.write(challengeValue.getBytes());
+			System.out.println("challenge: "+challengeValue);
 		}
 		out.flush();
 		out.close();
