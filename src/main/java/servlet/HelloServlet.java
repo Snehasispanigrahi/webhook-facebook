@@ -20,7 +20,7 @@ public class HelloServlet extends HttpServlet {
 		String value = req.getParameter(challenge);
 		ServletOutputStream out = resp.getOutputStream();
 		Enumeration<String> parameterNames = req.getParameterNames();
-		if(parameterNames != null && parameterNames.hasMoreElements())
+		while(parameterNames != null && parameterNames.hasMoreElements())
 			System.out.println("para"+parameterNames.nextElement());
 		System.out.println("challenge: "+challenge);
 		System.out.println("token: "+token);
