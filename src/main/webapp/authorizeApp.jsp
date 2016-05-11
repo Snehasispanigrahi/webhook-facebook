@@ -26,12 +26,12 @@
 	  
 	  function subscribeApp(page_id, page_access_token){
 		  console.log("Subscribing to the page : "+page_id);
-		  FB.api('/' + page_id + 'subscribed_apps', 
+		  FB.api('/' + page_id + '/subscribed_apps', 
 				  'post',
 				  {access_token: page_access_token},
-				  function(response)){
+				  function(response){
 			  console.log("Subscribing to the page",response);
-		  }
+		  });
 	  }
 	  
 	  
