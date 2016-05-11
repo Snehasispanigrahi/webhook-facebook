@@ -16,7 +16,7 @@ public class HelloServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String challenge = "hub.challenge";
 		String token = "hub.verify_token";
-		String value = req.getParameter("challenge");
+		String value = req.getParameter(challenge);
 //		ServletOutputStream out = resp.getOutputStream();
 		PrintWriter out = resp.getWriter();
 		if(token == "abc123")
