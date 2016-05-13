@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+
 @WebServlet(name = "MyServlet", urlPatterns = { "/webhook" })
 public class HelloServlet extends HttpServlet {
 
@@ -26,6 +29,24 @@ public class HelloServlet extends HttpServlet {
 		}
 		out.flush();
 		out.close();
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf8");
+
+		System.out.println("response: "+response);
+		
+		JsonParser jsonParser = new JsonParser();
+		JsonElement jsonElt = jsonParser.parse(response.toString());
+		
+        ServletOutputStream out = response.getOutputStream();
+//        JSONObject jsonObj = (JSONObject) JSONValue.parse(request.getParameter("para"));
+//        System.out.println(jsonObj.get("message"));
+//        JSONObject obj = new JSONObject();
+//        obj.put("message", "hello from server");
+//        out.print(obj);
+
 	}
 
 }
