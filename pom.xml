@@ -12,6 +12,11 @@
     <tomcat.version>8.0.28</tomcat.version>
   </properties>
   <dependencies>
+	<dependency>
+		<groupId>com.herokuapp.webhook-facebook</groupId>
+		<artifactId>gson</artifactId>
+		<version>2.2.2</version>
+	</dependency>
     <dependency>
         <groupId>org.apache.tomcat.embed</groupId>
         <artifactId>tomcat-embed-core</artifactId>
@@ -70,4 +75,11 @@
         </plugin>
     </plugins>
   </build>
+	<repositories>
+		<repository>
+			<id>project.local</id>
+			<name>project</name>
+			<url>file:${project.basedir}/repo</url>
+		</repository>
+	</repositories>
 </project>

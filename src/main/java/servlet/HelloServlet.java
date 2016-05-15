@@ -35,7 +35,7 @@ public class HelloServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf8");
 
-		System.out.println("response: "+response);
+		System.out.println("request: "+request);
 		
 		JsonParser jsonParser = new JsonParser();
 		JsonElement jsonElt = jsonParser.parse(response.toString());
