@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonStreamParser;
 
 @WebServlet(name = "MyServlet", urlPatterns = { "/webhook" })
 public class HelloServlet extends HttpServlet {
@@ -34,7 +35,7 @@ public class HelloServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("request1: "+request.toString());
+		System.out.println("request1: "+new JsonStreamParser(request));
 		
 		Map<String, String[]> parameterMap = request.getParameterMap();
 		System.out.println("request1: "+parameterMap);
