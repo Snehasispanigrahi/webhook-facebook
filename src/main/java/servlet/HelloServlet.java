@@ -36,15 +36,10 @@ public class HelloServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
 		System.out.println("request1: "+request.toString());
 		
 		Enumeration<String> parameterNames = request.getParameterNames();
-		
-		do {
-			System.out.println("para name: "+parameterNames.nextElement());
-		} while(parameterNames.hasMoreElements());
-		
-		
 //        ServletOutputStream out = request.getOutputStream();
 //        JSONObject jsonObj = (JSONObject) JSONValue.parse(request.getParameter("para"));
 //        System.out.println(jsonObj.get("message"));
