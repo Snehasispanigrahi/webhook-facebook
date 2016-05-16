@@ -15,7 +15,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonStreamParser;
 
-@WebServlet(name = "MyServlet", urlPatterns = { "/webhook" })
+@WebServlet(name = "HelloServlet", urlPatterns = { "/webhook" })
 public class HelloServlet extends HttpServlet {
 
 	@Override
@@ -36,10 +36,10 @@ public class HelloServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-		System.out.println("request1: "+request.toString());
+//		doGet(request, response);
+		System.out.println("request1: "+request);
 		
-		Enumeration<String> parameterNames = request.getParameterNames();
+//		Enumeration<String> parameterNames = request.getParameterNames();
 //        ServletOutputStream out = request.getOutputStream();
 //        JSONObject jsonObj = (JSONObject) JSONValue.parse(request.getParameter("para"));
 //        System.out.println(jsonObj.get("message"));
