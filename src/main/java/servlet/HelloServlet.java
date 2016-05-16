@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -37,8 +38,12 @@ public class HelloServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("request1: "+request.toString());
 		
-		JsonParser jsonParser = new JsonParser(request.toString());
-		System.out.println("test: "+jsonParser.toString());
+		Enumeration<String> parameterNames = request.getParameterNames();
+		
+		do {
+			System.out.println("para name: "+parameterNames.nextElement());
+		} while(parameterNames.hasMoreElements());
+		
 		
 //        ServletOutputStream out = request.getOutputStream();
 //        JSONObject jsonObj = (JSONObject) JSONValue.parse(request.getParameter("para"));
