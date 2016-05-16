@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -33,14 +34,21 @@ public class HelloServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf8");
-
 		System.out.println("request: "+request);
 		
-		JsonParser jsonParser = new JsonParser();
-		JsonElement jsonElt = jsonParser.parse(response.toString());
+		Map<String, String[]> parameterMap = request.getParameterMap();
 		
-        ServletOutputStream out = response.getOutputStream();
+		for (Map.Entry<String, String> entry : parameterMap.entrySet())
+		{
+		    System.out.println(entry.getKey() + "/" + entry.getValue());
+		}
+		
+		JsonParser jsonParser = new JsonParser();
+		JsonElement jsonElt = jsonParser.parse(request.toString());
+		
+		
+		
+//        ServletOutputStream out = request.getOutputStream();
 //        JSONObject jsonObj = (JSONObject) JSONValue.parse(request.getParameter("para"));
 //        System.out.println(jsonObj.get("message"));
 //        JSONObject obj = new JSONObject();
