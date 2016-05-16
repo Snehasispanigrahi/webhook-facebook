@@ -37,7 +37,7 @@ public class HelloServlet extends HttpServlet {
 		System.out.println("request1: "+request);
 		
 		Map<String, String[]> parameterMap = request.getParameterMap();
-		
+		System.out.println("request1: "+parameterMap);
 		for (Map.Entry<String, String[]> entry : parameterMap.entrySet())
 		{
 		    System.out.println(entry.getKey() + "/" + entry.getValue());
