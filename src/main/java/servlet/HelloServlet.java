@@ -35,19 +35,14 @@ public class HelloServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("request1: "+new JsonStreamParser(request.toString()));
-		
-		Map<String, String[]> parameterMap = request.getParameterMap();
-		System.out.println("request1: "+parameterMap);
-		for (Map.Entry<String, String[]> entry : parameterMap.entrySet())
-		{
-		    System.out.println(entry.getKey() + "/" + entry.getValue());
-		}
+		System.out.println("request1: "+request.toString());
 		
 		JsonParser jsonParser = new JsonParser();
 		JsonElement jsonElt = jsonParser.parse(request.toString());
 		
-		
+		if(jsonElt.isJsonArray()){
+			System.out.println("test");
+		}
 		
 //        ServletOutputStream out = request.getOutputStream();
 //        JSONObject jsonObj = (JSONObject) JSONValue.parse(request.getParameter("para"));
