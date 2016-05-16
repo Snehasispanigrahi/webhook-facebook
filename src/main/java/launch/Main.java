@@ -1,4 +1,4 @@
-package launch;
+package main.java.launch;
 
 import java.io.File;
 import java.net.URISyntaxException;

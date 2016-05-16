@@ -1,8 +1,7 @@
-package servlet;
+package main.java.servlet;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Enumeration;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -10,10 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonStreamParser;
 
 @WebServlet(name = "HelloServlet", urlPatterns = { "/webhook" })
 public class HelloServlet extends HttpServlet {
@@ -38,7 +33,29 @@ public class HelloServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		doGet(request, response);
 		System.out.println("request1: "+request);
+		BufferedReader bufferedReader = request.getReader();
+		char[] charBuffer = new char[128];
+		StringBuilder stringBuilder = new StringBuilder();
+		try {
+			if(bufferedReader != null){
+				int bytesRead = -1;
+	            while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
+	                stringBuilder.append(charBuffer, 0, bytesRead);
+	            }
+			}
+		} catch (IOException ex) {
+	        throw ex;
+	    } finally {
+	        if (bufferedReader != null) {
+	            try {
+	                bufferedReader.close();
+	            } catch (IOException ex) {
+	                throw ex;
+	            }
+	        }
+	    }
 		
+		System.out.println("request now:"+stringBuilder.toString());
 //		Enumeration<String> parameterNames = request.getParameterNames();
 //        ServletOutputStream out = request.getOutputStream();
 //        JSONObject jsonObj = (JSONObject) JSONValue.parse(request.getParameter("para"));
