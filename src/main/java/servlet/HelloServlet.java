@@ -34,7 +34,7 @@ public class HelloServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("request: "+request);
+		System.out.println("request1: "+request);
 		
 		Map<String, String[]> parameterMap = request.getParameterMap();
 		
