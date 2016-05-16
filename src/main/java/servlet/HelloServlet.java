@@ -37,12 +37,8 @@ public class HelloServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("request1: "+request.toString());
 		
-		JsonParser jsonParser = new JsonParser();
-		JsonElement jsonElt = jsonParser.parse(request.toString());
-		
-		if(jsonElt.isJsonArray()){
-			System.out.println("test");
-		}
+		JsonParser jsonParser = new JsonParser(request.toString());
+		System.out.println("test: "+jsonParser.toString());
 		
 //        ServletOutputStream out = request.getOutputStream();
 //        JSONObject jsonObj = (JSONObject) JSONValue.parse(request.getParameter("para"));
