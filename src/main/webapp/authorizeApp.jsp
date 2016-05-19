@@ -35,7 +35,15 @@
 		}
 
 		function submitPageId(page_id) {
-			console.log("1.Coming here",page_id);
+			console.log("1.Coming here", page_id);
+			$.ajax({
+				url : 'Subscription',
+				data : page_id,
+				type : 'post',
+				success : function(data) {
+					console.log(data);
+				}
+			});
 		}
 
 		// Only works after `FB.init` is called
