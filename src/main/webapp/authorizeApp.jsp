@@ -39,7 +39,7 @@
 			console.log("1.Coming here", page_id);
 			$.ajax({
 				url : 'Subscription',
-				data : $page_id,
+				data : {"data":$page_id},
 				type : 'post',
 				success : function(data) {
 					console.log(data);
