@@ -26,41 +26,16 @@ public class ProcessSubscription extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int ids;
+		String pageId;
         response.setContentType("text/html;charset=UTF-8");
 
         PrintWriter out = response.getWriter();
         String val = request.getParameter("page_id");
         System.out.print("val:"+val);
         if(val != null){
-            ids = Integer.parseInt(val);
-            out.print(ids);
+        	pageId = val;
+            out.print(pageId);
         }
-		BufferedReader bufferedReader = request.getReader();
-		
-		char[] charBuffer = new char[128];
-		StringBuilder stringBuilder = new StringBuilder();
-		try {
-			if(bufferedReader != null){
-				int bytesRead = -1;
-	            while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
-	                stringBuilder.append(charBuffer, 0, bytesRead);
-	            }
-			}
-		} catch (IOException ex) {
-	        throw ex;
-	    } finally {
-	        if (bufferedReader != null) {
-	            try {
-	                bufferedReader.close();
-	            } catch (IOException ex) {
-	                throw ex;
-	            }
-	        }
-	    }
-		
-		System.out.println("request came:"+stringBuilder.toString());
-		
 	}
 
 }
