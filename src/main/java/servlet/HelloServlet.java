@@ -50,11 +50,15 @@ public class HelloServlet extends HttpServlet {
 				for(fbEntry lead : leadList){
 					String externalSourceData = gson.toJson(lead);
 					System.out.println("lead request view: "+externalSourceData);
-//					externalSourceData = externalSourceData.replaceAll("\":[\"]?", "=");
-//					externalSourceData = externalSourceData.replaceAll("[\"]?,\"", "<br>");
-//					externalSourceData = externalSourceData.replace("{\"", "");
-//					externalSourceData = externalSourceData.replace("\"}", "");
-//					System.out.println("lead request view: "+externalSourceData);
+					
+					main.java.servlet.HelloServlet.fbEntry.fbChanges[] changes = lead.changes;
+					
+					for (int i = 0; i < changes.length; i++) {
+						main.java.servlet.HelloServlet.fbEntry.fbChanges.fbValues value = changes[i].value;
+						String leadgen_id = value.getLeadgen_id();
+						
+						System.out.println("Pull this complete udpate: "+leadgen_id);
+					}
 				}
 			}
 		}else{
@@ -189,10 +193,10 @@ public class HelloServlet extends HttpServlet {
 					String externalSourceData = gson.toJson(lead);
 					System.out.println("lead request view: "+externalSourceData);
 					
-					main.java.servlet.HelloServlet.fbEntry.fbChanges[] changes = lead.changes;
+					servlet.HelloServlet.fbEntry.fbChanges[] changes = lead.changes;
 					
 					for (int i = 0; i < changes.length; i++) {
-						main.java.servlet.HelloServlet.fbEntry.fbChanges.fbValues value = changes[i].value;
+						servlet.HelloServlet.fbEntry.fbChanges.fbValues value = changes[i].value;
 						String leadgen_id = value.getLeadgen_id();
 						
 						System.out.println("Pull this complete udpate: "+leadgen_id);
