@@ -162,11 +162,18 @@ public class HelloServlet extends HttpServlet {
 		JsonParser jsonParser = new JsonParser();
 		JsonElement jsonElt = jsonParser.parse(jsonRequest);
 		
-		if(jsonElt.isJsonArray()){
+		if(jsonElt.isJsonObject()){
+			JsonObject jsonObj = (JsonObject) jsonElt;
+			JsonArray entry = (JsonArray) jsonObj.get("entry");
+			jsonElt = jsonObj.get("object");
+			
+			System.out.println("object: "+jsonElt.toString());
+			
+			
 			GsonBuilder builder = new GsonBuilder();
-//			builder.setDateFormat("yyyy-MM-dd hh:mm:ss");
 			Gson gson = builder.create();
-			fbEntry[] leadList = gson.fromJson(jsonRequest, fbEntry[].class);
+			fbEntry[] leadList = gson.fromJson(entry, fbEntry[].class);
+			System.out.println("leadList :"+leadList);
 			if(leadList == null || leadList.length == 0)
 				System.out.println("No leads!");
 			else{
@@ -174,21 +181,13 @@ public class HelloServlet extends HttpServlet {
 				
 				for(fbEntry lead : leadList){
 					String externalSourceData = gson.toJson(lead);
-					System.out.println("lead request view: "+lead);
-//					externalSourceData = externalSourceData.replaceAll("\":[\"]?", "=");
-//					externalSourceData = externalSourceData.replaceAll("[\"]?,\"", "<br>");
-//					externalSourceData = externalSourceData.replace("{\"", "");
-//					externalSourceData = externalSourceData.replace("\"}", "");
-					
+					System.out.println("lead request view: "+externalSourceData);
 				}
 			}
 		}else{
-			System.out.println("Error: JSON is not an array");
-//			Gson gson = new Gson();
-//			CFError error = gson.fromJson(response, CFError.class);
-//			System.out.println(error.getStatus()+","+error.getStatus_code()+","+error.getMessage());
-//			throw new HomeBuy360Exception("Error Details="+response, HomeBuy360Exception.EXCEPTION);
+			System.out.println("Error: JSON is not an object");
 		}
+		
 	}
 
 }
