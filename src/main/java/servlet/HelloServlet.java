@@ -93,6 +93,12 @@ public class HelloServlet extends HttpServlet {
 					private String created_time;
 					private String page_id;
 					private String adgroup_id;
+					public String getLeadgen_id() {
+						return leadgen_id;
+					}
+					public void setLeadgen_id(String leadgen_id) {
+						this.leadgen_id = leadgen_id;
+					}
 				}
 			}
 		}
@@ -182,11 +188,22 @@ public class HelloServlet extends HttpServlet {
 				for(fbEntry lead : leadList){
 					String externalSourceData = gson.toJson(lead);
 					System.out.println("lead request view: "+externalSourceData);
+					
+					main.java.servlet.HelloServlet.fbEntry.fbChanges[] changes = lead.changes;
+					
+					for (int i = 0; i < changes.length; i++) {
+						main.java.servlet.HelloServlet.fbEntry.fbChanges.fbValues value = changes[i].value;
+						String leadgen_id = value.getLeadgen_id();
+						
+						System.out.println("Pull this complete udpate: "+leadgen_id);
+					}
 				}
 			}
 		}else{
 			System.out.println("Error: JSON is not an object");
 		}
+		
+		
 		
 	}
 
