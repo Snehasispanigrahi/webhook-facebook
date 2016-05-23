@@ -2,6 +2,9 @@ package servlet;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -200,6 +203,16 @@ public class HelloServlet extends HttpServlet {
 						String leadgen_id = value.getLeadgen_id();
 						
 						System.out.println("Pull this complete udpate: "+leadgen_id);
+						String access_token = "EAAHZA6f5by2kBACqq2dDuvHmc0OsZChc4jOPJwKvSXEtonM42hHSLk0ZCdzomOiAhahsPmf4ThEnfYfGoIZB2cu16DZAa2q9eDZCYpAZAkAZAZBnAj3IVp9t7VJnZCKJ02KEEyljkAZBahU6ECKu9BSIguejXhs1iLFF4AYr5YyZB4V9CQZDZD";
+						String url = "https://graph.facebook.com/v2.6/" +leadgen_id + "?access_token=" + access_token ;
+						URL urldemo = new URL(url);
+						URLConnection yc = urldemo.openConnection();
+						BufferedReader in = new BufferedReader(new InputStreamReader(yc.getInputStream()));
+						String inputLine;
+						while ((inputLine = in.readLine()) != null)
+							System.out.println(inputLine);
+						in.close();
+						
 					}
 				}
 			}
