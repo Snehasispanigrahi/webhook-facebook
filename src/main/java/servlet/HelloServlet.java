@@ -51,10 +51,10 @@ public class HelloServlet extends HttpServlet {
 					String externalSourceData = gson.toJson(lead);
 					System.out.println("lead request view: "+externalSourceData);
 					
-					main.java.servlet.HelloServlet.fbEntry.fbChanges[] changes = lead.changes;
+					fbEntry.fbChanges[] changes = lead.changes;
 					
 					for (int i = 0; i < changes.length; i++) {
-						main.java.servlet.HelloServlet.fbEntry.fbChanges.fbValues value = changes[i].value;
+						fbEntry.fbChanges.fbValues value = changes[i].value;
 						String leadgen_id = value.getLeadgen_id();
 						
 						System.out.println("Pull this complete udpate: "+leadgen_id);
@@ -193,10 +193,10 @@ public class HelloServlet extends HttpServlet {
 					String externalSourceData = gson.toJson(lead);
 					System.out.println("lead request view: "+externalSourceData);
 					
-					servlet.HelloServlet.fbEntry.fbChanges[] changes = lead.changes;
+					fbEntry.fbChanges[] changes = lead.changes;
 					
 					for (int i = 0; i < changes.length; i++) {
-						servlet.HelloServlet.fbEntry.fbChanges.fbValues value = changes[i].value;
+						fbEntry.fbChanges.fbValues value = changes[i].value;
 						String leadgen_id = value.getLeadgen_id();
 						
 						System.out.println("Pull this complete udpate: "+leadgen_id);
