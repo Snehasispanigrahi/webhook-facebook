@@ -34,7 +34,7 @@
 				/* How to generate a long-lived token:
 					1.Start with a short-lived token generated on a client and ship it back to your server.
 					2.Use the user token, your app ID and app secret to make the following call from your server to Facebook's servers: */
-				submitPageId(page_id,access_token);
+				submitPageId(page_id,page_access_token);
 				console.log("2.Subscribing to the page", response);
 			});
 		}
@@ -43,7 +43,7 @@
 			console.log("1.Coming here", page_id);
 			$.ajax({
 				url : 'Subscription',
-				data : {"page_id":page_id, "access_token":access_token},
+				data : {"page_id":page_id, "access_token":page_access_token},
 				type : 'post',
 				success : function(data) {
 					console.log(data);
