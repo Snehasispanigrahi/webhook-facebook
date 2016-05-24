@@ -22,9 +22,9 @@ public class ProcessSubscription extends HttpServlet {
 	
 	static String app_Secret = "b6e08769dc3d3421f9677855ba852013";
 	static String app_Id = "521073994746729";
-	static String app_AccessToken;
+	static String app_AccessToken = "521073994746729|ZupZl-GaTXZO9cwrogu88U16NFA";
 	
-	static{
+	/*static{
 //		https://graph.facebook.com//oauth/access_token?client_id=<app-id>&client_secret=<app-secret>&grant_type=client_credentials
 //		https://graph.facebook.com//oauth/access_token?client_id=521073994746729&client_secret=b6e08769dc3d3421f9677855ba852013&grant_type=client_credentials
 		String url = "https://graph.facebook.com//oauth/access_token?client_id="+ app_Id +"&client_secret=" + app_Secret + "&grant_type=client_credentials";
@@ -44,7 +44,7 @@ public class ProcessSubscription extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}  
-	}
+	}*/
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -57,13 +57,13 @@ public class ProcessSubscription extends HttpServlet {
 	    secret:b6e08769dc3d3421f9677855ba852013 */
 		
 		String pageId = request.getParameter("page_id");
-        String page_acessToken = request.getParameter("access_token");
-        System.out.print("page access token:"+page_acessToken);System.out.print("pageId:"+pageId);
+        String page_accessToken = request.getParameter("access_token");
+        System.out.print("page access token:"+page_accessToken);System.out.print("pageId:"+pageId);
 		
-        if(app_AccessToken != null && page_acessToken != null){
+        if(app_AccessToken != null && page_accessToken != null){
 //        	https://graph.facebook.com/debug_token?input_token=<page-short-live-access-token>&access_token=<app-accesstoken>
         	try {
-				String url = "https://graph.facebook.com/debug_token?input_token="+ page_acessToken +"&access_token=" + app_AccessToken;
+				String url = "https://graph.facebook.com/debug_token?input_token="+ page_accessToken +"&access_token=" + app_AccessToken;
 				URL urldemo = new URL(url);
 				URLConnection uc = urldemo.openConnection();
 				BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream()));
