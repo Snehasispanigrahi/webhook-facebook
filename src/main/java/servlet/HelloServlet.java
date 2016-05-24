@@ -201,9 +201,19 @@ public class HelloServlet extends HttpServlet {
 					for (int i = 0; i < changes.length; i++) {
 						fbEntry.fbChanges.fbValues value = changes[i].value;
 						String leadgen_id = value.getLeadgen_id();
-						
+//						before processing should we check the access token's life? If its expired only way to get is by logging in again.
+//						Page access tokens last up to 60 days (5184000 seconds), but more importantly, they last as long as the user access token that was used to acquire them. So they will be invalidated as soon as the user that you got them from:
+//
+//							1.logs out of FB.
+//							2.changes password.
+//							3.deauthorizes your application.
+//							Basically, when you lose the user's token, you will lose the page's token. Instead, you should retrieve page access tokens once per user access token. If you throw out a user access token, throw out the page token. You should not be trying to store page access tokens for any significant period of time. Instead you should get them as needed and forget them when a user's session dies.
+//
+//							To get a new page access token:
+//
+//							https://graph.facebook.com/PAGEID?fields=access_token&access_token=USER_ACCESS_TOKEN
 						System.out.println("Pull this complete udpate: "+leadgen_id);
-						String access_token = "EAAHZA6f5by2kBACqq2dDuvHmc0OsZChc4jOPJwKvSXEtonM42hHSLk0ZCdzomOiAhahsPmf4ThEnfYfGoIZB2cu16DZAa2q9eDZCYpAZAkAZAZBnAj3IVp9t7VJnZCKJ02KEEyljkAZBahU6ECKu9BSIguejXhs1iLFF4AYr5YyZB4V9CQZDZD";
+						String access_token = "EAAHZA6f5by2kBAFQRnvVn60nlQckPapZBIrZBkLTKqXoK1xcp2uYZCO2Ne2zuZB13wkGxfK6SKyEnfZAtsfDSkiY5GG5tyWG3SnXJrABWFyauDZCwVOwi9EXZCoubduvXWk3ukZBtjjVGf92nezfeSckOPDspiH2t4dZCLf0KgeLLnN1ZCk6MSnWZCCy";
 						String url = "https://graph.facebook.com/v2.6/" +leadgen_id + "?access_token=" + access_token ;
 						URL urldemo = new URL(url);
 						URLConnection yc = urldemo.openConnection();
