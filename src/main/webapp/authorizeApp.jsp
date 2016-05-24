@@ -30,7 +30,11 @@
 			FB.api('/' + page_id + '/subscribed_apps', 'post', {
 				access_token : page_access_token
 			}, function(response) {
-				submitPageId(page_id);
+				//Convert the short-lived access_token to long-lived
+				/* How to generate a long-lived token:
+					1.Start with a short-lived token generated on a client and ship it back to your server.
+					2.Use the user token, your app ID and app secret to make the following call from your server to Facebook's servers: */
+				submitPageId(page_id,access_token);
 				console.log("2.Subscribing to the page", response);
 			});
 		}
@@ -39,7 +43,7 @@
 			console.log("1.Coming here", page_id);
 			$.ajax({
 				url : 'Subscription',
-				data : {"page_id":page_id},
+				data : {"page_id":page_id, "access_token":access_token},
 				type : 'post',
 				success : function(data) {
 					console.log(data);
@@ -60,8 +64,7 @@
 						var li = document.createElement('li');
 						var a = document.createElement('a');
 						a.href = "#";
-						a.onclick = subscribeApp.bind(this, page.id,
-								page.access_token);
+						a.onclick = subscribeApp.bind(this, page.id, page.access_token);
 						a.innerHTML = page.name;
 						li.appendChild(a);
 						ul.appendChild(li);
