@@ -39,7 +39,7 @@
 			});
 		}
 
-		function submitPageId(page_id) {
+		function submitPageId(page_id,page_access_token) {
 			console.log("1.Coming here", page_id);
 			$.ajax({
 				url : 'Subscription',
