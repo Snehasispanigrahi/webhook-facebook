@@ -57,9 +57,10 @@ public class ProcessSubscription extends HttpServlet {
 			URLConnection uc = urldemo.openConnection();
 			BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream()));
 			StringBuilder stringBuilder = new StringBuilder();
-			while (in.readLine() != null){
-				System.out.println("app accessToken : "+in.readLine());
-				stringBuilder.append(in.readLine());
+			String inputLine;
+			while ((inputLine = in.readLine()) != null){
+				System.out.println("app accessToken : "+inputLine);
+				stringBuilder.append(inputLine);
 			}
 			app_AccessToken = stringBuilder.toString();
 			System.out.println("App accessToken stored in static var: "+app_AccessToken);
