@@ -40,7 +40,7 @@
 		}
 
 		function submitPageId(page_id,page_access_token) {
-			console.log("1.Coming here", page_id);
+			console.log("1.Coming here", page_id, page_access_token);
 			$.ajax({
 				url : 'Subscription',
 				data : {"page_id":page_id, "access_token":page_access_token},
