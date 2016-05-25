@@ -104,14 +104,15 @@ public class ProcessSubscription extends HttpServlet {
 		}
 		
 		String pageId = request.getParameter("page_id");
-		System.out.println("pageId:"+pageId);
         String page_accessToken = request.getParameter("access_token");
-        System.out.println("page access token:"+page_accessToken);
 		
+        System.out.println("app access token: "+app_AccessToken);
+        
         if(app_AccessToken != null && page_accessToken != null){
 //        	https://graph.facebook.com/debug_token?input_token=<page-short-live-access-token>&access_token=<app-accesstoken>
         	try {
 				String url = "https://graph.facebook.com/debug_token?input_token="+ page_accessToken +"&access_token=" + app_AccessToken;
+				System.out.println("url: "+url);
 				URL urldemo = new URL(url);
 				URLConnection uc = urldemo.openConnection();
 				BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream()));
