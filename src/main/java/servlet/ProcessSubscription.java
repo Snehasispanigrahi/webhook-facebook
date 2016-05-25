@@ -95,8 +95,9 @@ public class ProcessSubscription extends HttpServlet {
 	    secret:b6e08769dc3d3421f9677855ba852013 */
 		
 		String pageId = request.getParameter("page_id");
+		System.out.println("Inside doPost 2");
         String page_accessToken = request.getParameter("access_token");
-        System.out.println("Inside doPost 2");
+        
         System.out.print("page access token:"+page_accessToken);System.out.print("pageId:"+pageId);
 		
         if(app_AccessToken != null && page_accessToken != null){
