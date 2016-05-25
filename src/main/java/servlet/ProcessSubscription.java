@@ -24,7 +24,7 @@ public class ProcessSubscription extends HttpServlet {
 	static String app_Id = "521073994746729";
 	static String app_AccessToken = "521073994746729|ZupZl-GaTXZO9cwrogu88U16NFA";
 	
-	/*static{
+	static{
 //		https://graph.facebook.com//oauth/access_token?client_id=<app-id>&client_secret=<app-secret>&grant_type=client_credentials
 //		https://graph.facebook.com//oauth/access_token?client_id=521073994746729&client_secret=b6e08769dc3d3421f9677855ba852013&grant_type=client_credentials
 		String url = "https://graph.facebook.com//oauth/access_token?client_id="+ app_Id +"&client_secret=" + app_Secret + "&grant_type=client_credentials";
@@ -44,7 +44,7 @@ public class ProcessSubscription extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}  
-	}*/
+	}
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -70,6 +70,18 @@ public class ProcessSubscription extends HttpServlet {
 				String inputLine;
 				while ((inputLine = in.readLine()) != null)
 					System.out.println("debug the page access token"+inputLine);
+				
+//				page access token:EAAHZA6f5by2kBAIcKsATGS6cITgZBzEocTXt390tTVqcmDhLKBMklc3W4JWIU8zdTg7RARr22Mb3aaCsYrKrF6ZBZBN9caqdZCAw8AZAZBBCvSRx94AZAmtGnVsLVtc4xjobFS8rKE5X8eBpEw0btM30LdxvKnTDynJOEstNZABIrcNkyZBfbLZA4ik
+//				pageId:1376204942612961
+				/*debug the page access token
+				 * {"data":{	"app_id":"521073994746729",
+								"application":"Lead Generating App",
+								"expires_at":1464134400,
+								"is_valid":true,
+								"profile_id":"1376204942612961",
+								"scopes":["manage_pages","public_profile"],
+								"user_id":"1137096926311693"}}*/
+				
 				in.close();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
