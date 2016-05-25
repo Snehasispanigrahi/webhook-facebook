@@ -67,10 +67,9 @@ public class ProcessSubscription extends HttpServlet {
 		}
 	}
 	
-	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	private void doget() {
 		// TODO Auto-generated method stub
-		super.service(req, resp);
+System.out.println("test");
 	}
 	
 	@Override
