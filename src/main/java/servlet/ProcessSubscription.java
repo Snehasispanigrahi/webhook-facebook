@@ -56,10 +56,13 @@ public class ProcessSubscription extends HttpServlet {
 			URL urldemo = new URL(url);
 			URLConnection uc = urldemo.openConnection();
 			BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream()));
-			String inputLine;
-			while ((inputLine = in.readLine()) != null)
-				System.out.println("app accessToken : "+inputLine);
-			app_AccessToken = inputLine;
+			StringBuilder stringBuilder = new StringBuilder();
+			while (in.readLine() != null){
+				System.out.println("app accessToken : "+in.readLine());
+				stringBuilder.append(in.readLine());
+			}
+			app_AccessToken = stringBuilder.toString();
+			System.out.println("App accessToken stored in static var: "+app_AccessToken);
 			in.close();
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
