@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.jar.Attributes.Name;
 
@@ -15,6 +16,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 @WebServlet(name = "ProcessSubscription", urlPatterns = { "/Subscription" })
 public class ProcessSubscription extends HttpServlet {
@@ -106,6 +112,9 @@ public class ProcessSubscription extends HttpServlet {
 		while (parameterNames.hasMoreElements()) {
 			String paraName = (String) parameterNames.nextElement();
 			System.out.println("Para name: "+paraName+", Value: "+request.getParameter(paraName));
+//			Para name: page_id, Value: 1376204942612961
+//			Para name: access_token, 
+//			Value: EAAHZA6f5by2kBAMvFskTVhsDr3GoW6ljIMrhN5xMiYBvraz1kXBzVf7CX4TTFyL5UW5CMYxRhJenplDEb9bwCkCmRsSIQccmsgk8CHy1ZCWPToLqEvSYYeM9B0eahCy0YQ8HDpNkKh92JRAIWxBonvpWDB2u0mxPGgNxl6QjyBgfIfgV2l
 		}
 		
 		String pageId = request.getParameter("page_id");
@@ -118,23 +127,58 @@ public class ProcessSubscription extends HttpServlet {
         	try {
 				String url = "https://graph.facebook.com/debug_token?input_token="+ page_accessToken +"&" + app_AccessToken;
 				System.out.println("url: "+url);
+				//url: https://graph.facebook.com/debug_token?input_token=EAAHZA6f5by2kBAMvFskTVhsDr3GoW6ljIMrhN5xMiYBvraz1kXBzVf7CX4TTFyL5UW5CMYxRhJenplDEb9bwCkCmRsSIQccmsgk8CHy1ZCWPToLqEvSYYeM9B0eahCy0YQ8HDpNkKh92JRAIWxBonvpWDB2u0mxPGgNxl6QjyBgfIfgV2l&access_token=521073994746729|ZupZl-GaTXZO9cwrogu88U16NFA
 				URL urldemo = new URL(url);
 				URLConnection uc = urldemo.openConnection();
 				BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream()));
 				String inputLine;
-				while ((inputLine = in.readLine()) != null)
+				StringBuilder debugATResponse = new StringBuilder();
+				while ((inputLine = in.readLine()) != null){
 					System.out.println("debug the page access token"+inputLine);
-				
-//				page access token:EAAHZA6f5by2kBAIcKsATGS6cITgZBzEocTXt390tTVqcmDhLKBMklc3W4JWIU8zdTg7RARr22Mb3aaCsYrKrF6ZBZBN9caqdZCAw8AZAZBBCvSRx94AZAmtGnVsLVtc4xjobFS8rKE5X8eBpEw0btM30LdxvKnTDynJOEstNZABIrcNkyZBfbLZA4ik
-//				pageId:1376204942612961
+					debugATResponse.append(inputLine);
+				}
 				/*debug the page access token
-				 * {"data":{	"app_id":"521073994746729",
-								"application":"Lead Generating App",
-								"expires_at":1464134400,
-								"is_valid":true,
-								"profile_id":"1376204942612961",
-								"scopes":["manage_pages","public_profile"],
-								"user_id":"1137096926311693"}}*/
+				{
+				    "data": {
+				        "app_id": "521073994746729",
+				        "application": "Lead Generating App",
+				        "expires_at": 1464174000,
+				        "is_valid": true,
+				        "profile_id": "1376204942612961",
+				        "scopes": [
+				            "manage_pages",
+				            "public_profile"
+				        ],
+				        "user_id": "1137096926311693"
+				    }
+				}*/
+				
+				JsonParser parser = new JsonParser();
+				JsonElement jElt = parser.parse(new InputStreamReader(uc.getInputStream()));
+				if(jElt.isJsonObject()){
+					JsonObject jsonObj = (JsonObject) jElt;
+					JsonObject data = (JsonObject) jsonObj.get("data");
+					JsonElement app_id = data.get("app_id");
+					System.out.println("app_id: "+app_id.getAsString());
+					
+					JsonElement expires_at = data.get("expires_at");
+					System.out.println("expires_at: "+new Date(expires_at.getAsLong()));
+					
+					JsonElement is_valid = data.get("is_valid");
+					System.out.println("is_valid: "+is_valid.getAsBoolean());
+				}
+				
+				//check the expires at, before 5days we'll try regenerating 
+				
+				//generate url
+				/*https://graph.facebook.com/oauth/access_token?
+					grant_type=fb_exchange_token&
+					client_id=521073994746729&
+					client_secret=b6e08769dc3d3421f9677855ba852013&
+					fb_exchange_token=EAAHZA6f5by2kBAKStpAzrpl6bOzDV9YQ49rfwNTFUpGZBC4GLuD0AyA6gd48N3EIe1hduxEG5eZAaROZApj019dZCwXouiZCsfRCdB6VAOZAkAhkklZBNYXwnoKrq8AgA1NoocPagYHfW3oyAOQUd9i98D5HqleLBYFuy1YSVo3dnypuHldKBeQq*/
+
+				
+				
 				
 				in.close();
 			} catch (Exception e) {
