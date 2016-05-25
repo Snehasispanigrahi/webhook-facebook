@@ -6,7 +6,10 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Enumeration;
+import java.util.jar.Attributes.Name;
 
+import javax.print.attribute.standard.MediaSize.NA;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -93,6 +96,16 @@ public class ProcessSubscription extends HttpServlet {
 	    fb_exchange_token={short-lived-token}  */
 	    /* app-id:521073994746729
 	    secret:b6e08769dc3d3421f9677855ba852013 */
+		
+		Enumeration<String> parameterNames = request.getParameterNames();
+		
+		System.out.println("parameterNames: "+parameterNames);
+		
+		while (parameterNames.hasMoreElements()) {
+			String string = (String) parameterNames.nextElement();
+			System.out.println("name ; "+string);
+			System.out.println("value ; "+request.getParameter(string));
+		}
 		
 		String pageId = request.getParameter("page_id");
 		System.out.println("Inside doPost 2");
