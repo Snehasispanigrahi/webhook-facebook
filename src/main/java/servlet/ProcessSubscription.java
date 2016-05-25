@@ -96,9 +96,10 @@ public class ProcessSubscription extends HttpServlet {
 		
 		String pageId = request.getParameter("page_id");
 		System.out.println("Inside doPost 2");
+		System.out.print("pageId:"+pageId);
         String page_accessToken = request.getParameter("access_token");
-        
-        System.out.print("page access token:"+page_accessToken);System.out.print("pageId:"+pageId);
+        System.out.println("Inside doPost 3");
+        System.out.print("page access token:"+page_accessToken);
 		
         if(app_AccessToken != null && page_accessToken != null){
 //        	https://graph.facebook.com/debug_token?input_token=<page-short-live-access-token>&access_token=<app-accesstoken>
