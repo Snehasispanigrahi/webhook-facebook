@@ -154,7 +154,9 @@ public class ProcessSubscription extends HttpServlet {
 				}*/
 				
 				JsonParser parser = new JsonParser();
-				JsonElement jElt = parser.parse(new InputStreamReader(uc.getInputStream()));
+				JsonElement jElt = parser.parse(debugATResponse.toString());
+				
+				
 				if(jElt.isJsonObject()){
 					JsonObject jsonObj = (JsonObject) jElt;
 					JsonObject data = (JsonObject) jsonObj.get("data");
