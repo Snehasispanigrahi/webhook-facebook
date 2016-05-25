@@ -65,7 +65,6 @@ public class ProcessSubscription extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		super.init();
 	}
 	
 	@Override
