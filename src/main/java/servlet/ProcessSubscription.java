@@ -67,13 +67,25 @@ public class ProcessSubscription extends HttpServlet {
 		}
 	}
 	
-	private void doget() {
-		// TODO Auto-generated method stub
-System.out.println("test");
+	
+	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println("Inside service");
+
+		super.service(req, resp);
 	}
 	
 	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println("Inside doGet");
+		super.doGet(req, resp);
+	}
+	
+	
+	
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Inside doPost");
 		/* GET /oauth/access_token?  
 	    grant_type=fb_exchange_token&amp;           
 	    client_id={app-id}&amp;
