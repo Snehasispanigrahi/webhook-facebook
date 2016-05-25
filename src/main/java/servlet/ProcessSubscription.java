@@ -68,6 +68,12 @@ public class ProcessSubscription extends HttpServlet {
 	}
 	
 	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		super.service(req, resp);
+	}
+	
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* GET /oauth/access_token?  
 	    grant_type=fb_exchange_token&amp;           
