@@ -60,6 +60,7 @@ public class ProcessSubscription extends HttpServlet {
 			String inputLine;
 			while ((inputLine = in.readLine()) != null){
 				System.out.println("app accessToken : "+inputLine);
+//				app accessToken : access_token=521073994746729|ZupZl-GaTXZO9cwrogu88U16NFA
 				stringBuilder.append(inputLine);
 			}
 			app_AccessToken = stringBuilder.toString();
@@ -115,7 +116,7 @@ public class ProcessSubscription extends HttpServlet {
         if(app_AccessToken != null && page_accessToken != null){
 //        	https://graph.facebook.com/debug_token?input_token=<page-short-live-access-token>&access_token=<app-accesstoken>
         	try {
-				String url = "https://graph.facebook.com/debug_token?input_token="+ page_accessToken +"&access_token=" + app_AccessToken;
+				String url = "https://graph.facebook.com/debug_token?input_token="+ page_accessToken +"&" + app_AccessToken;
 				System.out.println("url: "+url);
 				URL urldemo = new URL(url);
 				URLConnection uc = urldemo.openConnection();
