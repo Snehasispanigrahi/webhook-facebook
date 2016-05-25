@@ -98,22 +98,15 @@ public class ProcessSubscription extends HttpServlet {
 	    secret:b6e08769dc3d3421f9677855ba852013 */
 		
 		Enumeration<String> parameterNames = request.getParameterNames();
-		
-		System.out.println("parameterNames: "+parameterNames);
-		
 		while (parameterNames.hasMoreElements()) {
-			String string = (String) parameterNames.nextElement();
-			System.out.println("name ; "+string);
-			System.out.println("value ; "+request.getParameter(string));
+			String paraName = (String) parameterNames.nextElement();
+			System.out.println("Para name: "+paraName+", Value: "+request.getParameter(paraName));
 		}
 		
 		String pageId = request.getParameter("page_id");
-		System.out.println("Inside doPost 2");
-		System.out.print("pageId:"+pageId);
+		System.out.println("pageId:"+pageId);
         String page_accessToken = request.getParameter("access_token");
-        System.out.println("Inside doPost 3");
-        System.out.println("Inside doPost 4");
-        System.out.print("page access token:"+page_accessToken);
+        System.out.println("page access token:"+page_accessToken);
 		
         if(app_AccessToken != null && page_accessToken != null){
 //        	https://graph.facebook.com/debug_token?input_token=<page-short-live-access-token>&access_token=<app-accesstoken>
