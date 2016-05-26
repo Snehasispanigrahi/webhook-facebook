@@ -145,7 +145,7 @@ public class ProcessSubscription extends HttpServlet {
 				System.out.println("app_id: " + app_id.getAsString());
 
 				JsonElement expires_at = data.get("expires_at");
-				Date expiryDate = new Date(expires_at.getAsLong());
+				Date expiryDate = new Date(expires_at.getAsLong()*1000);
 				System.out.println("expires_at: " + expiryDate);
 
 				JsonElement is_valid = data.get("is_valid");
