@@ -7,23 +7,27 @@
 <title>Integrate with FB</title>
 </head>
 <body>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 	<script>
-	  window.fbAsyncInit = function() {
-	    FB.init({
-	      appId      : '521073994746729',
-	      xfbml      : true,
-	      version    : 'v2.6'
-	    });
-	  };
-	var pageId;
-	  (function(d, s, id){
-	     var js, fjs = d.getElementsByTagName(s)[0];
-	     if (d.getElementById(id)) {return;}
-	     js = d.createElement(s); js.id = id;
-	     js.src = "//connect.facebook.net/en_US/sdk.js";
-	     fjs.parentNode.insertBefore(js, fjs);
-	   }(document, 'script', 'facebook-jssdk'));
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId : '521073994746729',
+				xfbml : true,
+				version : 'v2.6'
+			});
+		};
+		var pageId;
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {
+				return;
+			}
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "//connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
 
 		function subscribeApp(page_id, page_access_token) {
 			console.log("Subscribing to the page : " + page_id);
@@ -34,16 +38,19 @@
 				/* How to generate a long-lived token:
 					1.Start with a short-lived token generated on a client and ship it back to your server.
 					2.Use the user token, your app ID and app secret to make the following call from your server to Facebook's servers: */
-				submitPageId(page_id,page_access_token);
+				submitPageId(page_id, page_access_token);
 				console.log("2.Subscribing to the page", response);
 			});
 		}
 
-		function submitPageId(page_id,page_access_token) {
+		function submitPageId(page_id, page_access_token) {
 			console.log("1.Coming here", page_id, page_access_token);
 			$.ajax({
 				url : 'Subscription',
-				data : {"page_id":page_id, "access_token":page_access_token},
+				data : {
+					"page_id" : page_id,
+					"access_token" : page_access_token
+				},
 				type : 'post',
 				success : function(data) {
 					console.log(data);
@@ -64,7 +71,8 @@
 						var li = document.createElement('li');
 						var a = document.createElement('a');
 						a.href = "#";
-						a.onclick = subscribeApp.bind(this, page.id, page.access_token);
+						a.onclick = subscribeApp.bind(this, page.id,
+								page.access_token);
 						a.innerHTML = page.name;
 						li.appendChild(a);
 						ul.appendChild(li);

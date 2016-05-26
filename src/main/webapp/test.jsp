@@ -8,29 +8,29 @@
 </head>
 <body>
 	<script>
-	 window.fbAsyncInit = function() {
-		    FB.init({
-		      appId      : '521073994746729',
-		      xfbml      : true,
-		      version    : 'v2.6'
-		    });
-		  };
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId : '521073994746729',
+				xfbml : true,
+				version : 'v2.6'
+			});
+		};
 		var pageId;
-		  (function(d, s, id){
-		     var js, fjs = d.getElementsByTagName(s)[0];
-		     if (d.getElementById(id)) {return;}
-		     js = d.createElement(s); js.id = id;
-		     js.src = "//connect.facebook.net/en_US/sdk.js";
-		     fjs.parentNode.insertBefore(js, fjs);
-		   }(document, 'script', 'facebook-jssdk'));
-	function myFacebookLogin() {FB.api(
-			  '/130985787307645',
-			  'GET',
-			  {},
-			  function(response) {
-				  console.log("Successful", response);
-			  }
-			);}
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {
+				return;
+			}
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "//connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+		function myFacebookLogin() {
+			FB.api('/130985787307645', 'GET', {}, function(response) {
+				console.log("Successful", response);
+			});
+		}
 	</script>
 	<button onclick="myFacebookLogin()">Login with Facebook</button>
 </body>
