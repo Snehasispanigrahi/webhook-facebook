@@ -128,8 +128,10 @@ public class ProcessSubscription extends HttpServlet {
 			 * ], "user_id": "1137096926311693" } }
 			 */
 
-			if (requireToExpandTheToken(debugATResponse))
-				return getLongLivedToken(page_accessToken);
+			if (requireToExpandTheToken(debugATResponse)){
+				String longLivedToken = getLongLivedToken(page_accessToken);
+				debugToken(longLivedToken);
+			}
 		}
 		return page_accessToken;
 	}
