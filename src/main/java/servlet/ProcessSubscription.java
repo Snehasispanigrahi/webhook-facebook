@@ -153,7 +153,7 @@ public class ProcessSubscription extends HttpServlet {
 
 				// check the expires at, before 5days we'll try regenerating
 				Date now = new Date();
-				long diff = now.getTime() - expiryDate.getTime();
+				long diff = expiryDate.getTime() - now.getTime();
 				long diffHours = diff / (60 * 60 * 1000);
 				System.out.println("difference in hrs: " + diffHours);
 				if (diffHours < 48) {
