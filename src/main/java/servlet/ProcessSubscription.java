@@ -190,7 +190,8 @@ public class ProcessSubscription extends HttpServlet {
 
 		String longLiveResponse = requestUrl(url);
 		int startIndexOfAT = longLiveResponse.indexOf("access_token=");
-		int endIndexOfAT = longLiveResponse.indexOf(longLiveResponse, startIndexOfAT);
+		int endIndexOfAT = longLiveResponse.indexOf("&", startIndexOfAT);
+		
 		longLiveResponse = longLiveResponse.substring(startIndexOfAT,endIndexOfAT).replaceAll("access_token=", "");
 //		access_token=EAAHZA6f5by2kBAJGo9TOHmQZA6g6ArtrSWILYwv8b7ymfQ5urWqX6mm9JLOAY0SKUJw7tpZAxIILjJWZBjvNUEOTt4cvXLC0P9U4xJ6uDkz3p5liKECP26sOKIDDmXDOFL2tKupg6EjZAAJtPQOuB5lZBmpMcYjh5lUN9f3ulckwZDZD
 //		&expires=5176174
