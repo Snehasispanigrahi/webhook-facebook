@@ -37,6 +37,8 @@ public class ProcessSubscription extends HttpServlet {
 	static String app_Secret = "b6e08769dc3d3421f9677855ba852013";
 	static String app_Id = "521073994746729";
 	static String app_AccessToken = "521073994746729|ZupZl-GaTXZO9cwrogu88U16NFA";
+	private static int counter = 0;
+	static String hb_access_code = "access_" + counter ;
 
 	@Override
 	public void init() throws ServletException {
@@ -50,15 +52,6 @@ public class ProcessSubscription extends HttpServlet {
 		app_AccessToken = requestUrl(url);
 		System.out.println("App accessToken stored in static var: " + app_AccessToken);
 		
-		try {
-			storeInDB();
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	@Override
@@ -95,6 +88,8 @@ public class ProcessSubscription extends HttpServlet {
 		
 		System.out.println("We need to store page_acess_token(Long lived): "+pageAT_Store_In_DB + " & pageid: "+pageId_Store_In_DB);
 
+		counter++;
+		storeInDB(hb_access_code,pageAT_Store_In_DB,pageId_Store_In_DB);
 		
 		/*
 		 * response.setContentType("text/html;charset=UTF-8"); PrintWriter out =
@@ -183,7 +178,14 @@ public class ProcessSubscription extends HttpServlet {
 		 * EAAHZA6f5by2kBAKStpAzrpl6bOzDV9YQ49rfwNTFUpGZBC4GLuD0AyA6gd48N3EIe1hduxEG5eZAaROZApj019dZCwXouiZCsfRCdB6VAOZAkAhkklZBNYXwnoKrq8AgA1NoocPagYHfW3oyAOQUd9i98D5HqleLBYFuy1YSVo3dnypuHldKBeQq
 		 */
 
-		return requestUrl(url);
+		String longLiveResponse = requestUrl(url);
+		int startIndexOfAT = longLiveResponse.indexOf("access_token=");
+		int endIndexOfAT = longLiveResponse.indexOf(longLiveResponse, startIndexOfAT);
+		longLiveResponse = longLiveResponse.substring(startIndexOfAT,endIndexOfAT).replaceAll("access_token=", "");
+//		access_token=EAAHZA6f5by2kBAJGo9TOHmQZA6g6ArtrSWILYwv8b7ymfQ5urWqX6mm9JLOAY0SKUJw7tpZAxIILjJWZBjvNUEOTt4cvXLC0P9U4xJ6uDkz3p5liKECP26sOKIDDmXDOFL2tKupg6EjZAAJtPQOuB5lZBmpMcYjh5lUN9f3ulckwZDZD
+//		&expires=5176174
+		
+		return longLiveResponse;
 	}
 
 	private String requestUrl(String url) {
@@ -196,7 +198,7 @@ public class ProcessSubscription extends HttpServlet {
 			BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream()));
 			String inputLine;
 			while ((inputLine = in.readLine()) != null) {
-				System.out.println("response" + inputLine);
+				System.out.println("response: " + inputLine);
 				response.append(inputLine);
 			}
 			return response.toString();
@@ -222,17 +224,17 @@ public class ProcessSubscription extends HttpServlet {
 
 	}
 	
-    public void storeInDB() throws URISyntaxException, SQLException {
+    public void storeInDB(String hb_access_code2, String pageAT_Store_In_DB, String pageId_Store_In_DB) throws URISyntaxException, SQLException {
         
         Connection connection = getConnection();
         
         Statement stmt = connection.createStatement();
-        stmt.executeUpdate("DROP TABLE IF EXISTS ticks");
-        stmt.executeUpdate("CREATE TABLE ticks (tick timestamp)");
-        stmt.executeUpdate("INSERT INTO ticks VALUES (now())");
-        ResultSet rs = stmt.executeQuery("SELECT tick FROM ticks");
+        stmt.executeUpdate("INSERT INTO access_token VALUES ("+hb_access_code2+","+pageId_Store_In_DB+","+pageAT_Store_In_DB+",now())");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM access_token");
         while (rs.next()) {
-            System.out.println("Read from DB: " + rs.getTimestamp("tick"));
+            System.out.println("Read from DB(pageId_Store_In_DB): " + rs.getString(1));
+            System.out.println("Read from DB(pageAT_Store_In_DB): " + rs.getString(2));
+            System.out.println("Read from DB(created_time): " + rs.getTimestamp(3));
         }
     }
 
