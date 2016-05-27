@@ -238,9 +238,9 @@ public class ProcessSubscription extends HttpServlet {
     public void storeInDB(String hb_access_code2, String pageAT_Store_In_DB, String pageId_Store_In_DB) throws URISyntaxException, SQLException {
         
         Connection connection = getConnection();
-        
+        int id = 0;
         Statement stmt = connection.createStatement();
-        stmt.executeUpdate("INSERT INTO access_token VALUES ('"+hb_access_code2+"','"+pageId_Store_In_DB+"','"+pageAT_Store_In_DB+"',now())");
+        stmt.executeUpdate("INSERT INTO access_token VALUES ("+ id++ +",'"+hb_access_code2+"','"+pageId_Store_In_DB+"','"+pageAT_Store_In_DB+"',now())");
         ResultSet rs = stmt.executeQuery("SELECT * FROM access_token");
         while (rs.next()) {
             System.out.println("Read from DB(pageId_Store_In_DB): " + rs.getString(1));
