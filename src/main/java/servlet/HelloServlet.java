@@ -198,7 +198,16 @@ public class HelloServlet extends HttpServlet {
 						System.out.println("Pull this complete udpate: " + leadgen_id);
 						System.out.println("page_id: " + value.page_id);
 						
-						String access_token = readFromDB(value.page_id);
+						String access_token = null;
+						try {
+							access_token = readFromDB(value.page_id);
+						} catch (URISyntaxException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						System.out.println("access_token: " + access_token);
 //						String access_token = "EAAHZA6f5by2kBAFQRnvVn60nlQckPapZBIrZBkLTKqXoK1xcp2uYZCO2Ne2zuZB13wkGxfK6SKyEnfZAtsfDSkiY5GG5tyWG3SnXJrABWFyauDZCwVOwi9EXZCoubduvXWk3ukZBtjjVGf92nezfeSckOPDspiH2t4dZCLf0KgeLLnN1ZCk6MSnWZCCy";
 						try {

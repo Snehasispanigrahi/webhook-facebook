@@ -89,7 +89,17 @@ public class ProcessSubscription extends HttpServlet {
 		System.out.println("We need to store page_acess_token(Long lived): "+pageAT_Store_In_DB + " & pageid: "+pageId_Store_In_DB);
 
 		counter++;
-		storeInDB(hb_access_code,pageAT_Store_In_DB,pageId_Store_In_DB);
+		
+		
+		try {
+			storeInDB(hb_access_code,pageAT_Store_In_DB,pageId_Store_In_DB);
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		/*
 		 * response.setContentType("text/html;charset=UTF-8"); PrintWriter out =
