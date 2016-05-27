@@ -345,7 +345,7 @@ public class HelloServlet extends HttpServlet {
         Connection connection = getConnection();
         
         Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT page_access_token FROM access_token where page_id=:"+pageId_Store_In_DB);
+        ResultSet rs = stmt.executeQuery("SELECT page_access_token FROM access_token where page_id="+pageId_Store_In_DB);
         while (rs.next()) {
             System.out.println("Read from DB: " + rs.getString("page_access_token"));
         }
