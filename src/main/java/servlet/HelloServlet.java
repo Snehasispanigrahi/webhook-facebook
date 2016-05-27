@@ -239,7 +239,7 @@ public class HelloServlet extends HttpServlet {
 	private String debugToken(String page_accessToken) {
 		if (app_AccessToken != null && page_accessToken != null) {
 			// https://graph.facebook.com/debug_token?input_token=<page-short-live-access-token>&access_token=<app-accesstoken>
-			String url = "https://graph.facebook.com/debug_token?input_token=" + page_accessToken + "&"
+			String url = "https://graph.facebook.com/debug_token?input_token=" + page_accessToken + "&access_token="
 					+ app_AccessToken;
 			String debugATResponse = requestUrl(url);
 			/*
