@@ -4,8 +4,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -189,9 +196,11 @@ public class HelloServlet extends HttpServlet {
 						 *	https://graph.facebook.com/PAGEID?fields=access_token&access_token=USER_ACCESS_TOKEN
 						 */
 						System.out.println("Pull this complete udpate: " + leadgen_id);
+						System.out.println("page_id: " + value.page_id);
 						
-						
-						String access_token = "EAAHZA6f5by2kBAFQRnvVn60nlQckPapZBIrZBkLTKqXoK1xcp2uYZCO2Ne2zuZB13wkGxfK6SKyEnfZAtsfDSkiY5GG5tyWG3SnXJrABWFyauDZCwVOwi9EXZCoubduvXWk3ukZBtjjVGf92nezfeSckOPDspiH2t4dZCLf0KgeLLnN1ZCk6MSnWZCCy";
+						String access_token = readFromDB(value.page_id);
+						System.out.println("access_token: " + access_token);
+//						String access_token = "EAAHZA6f5by2kBAFQRnvVn60nlQckPapZBIrZBkLTKqXoK1xcp2uYZCO2Ne2zuZB13wkGxfK6SKyEnfZAtsfDSkiY5GG5tyWG3SnXJrABWFyauDZCwVOwi9EXZCoubduvXWk3ukZBtjjVGf92nezfeSckOPDspiH2t4dZCLf0KgeLLnN1ZCk6MSnWZCCy";
 						try {
 							String url = "https://graph.facebook.com/v2.6/" + leadgen_id + "?access_token="
 									+ access_token;
@@ -310,5 +319,31 @@ public class HelloServlet extends HttpServlet {
 
 		return requestUrl(url);
 	}
+	
+	private static Connection getConnection() throws URISyntaxException, SQLException {
+		URI dbUri = new URI(System.getenv("DATABASE_URL"));
+
+        String username = dbUri.getUserInfo().split(":")[0];
+        String password = dbUri.getUserInfo().split(":")[1];
+        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + dbUri.getPath();
+
+        return DriverManager.getConnection(dbUrl, username, password);
+
+	}
+	
+    public String readFromDB(String pageId_Store_In_DB) throws URISyntaxException, SQLException {
+        
+        Connection connection = getConnection();
+        
+        Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT page_access_token FROM access_token where page_id=:"+pageId_Store_In_DB);
+        while (rs.next()) {
+            System.out.println("Read from DB: " + rs.getString("page_access_token"));
+        }
+        
+        String page_AT = rs.getString("page_access_token");
+        
+        return page_AT;
+    }
 	
 }
