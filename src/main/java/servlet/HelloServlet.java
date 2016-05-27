@@ -208,7 +208,9 @@ public class HelloServlet extends HttpServlet {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-						System.out.println("access_token: " + access_token);
+						
+						debugToken(access_token);
+						
 //						String access_token = "EAAHZA6f5by2kBAFQRnvVn60nlQckPapZBIrZBkLTKqXoK1xcp2uYZCO2Ne2zuZB13wkGxfK6SKyEnfZAtsfDSkiY5GG5tyWG3SnXJrABWFyauDZCwVOwi9EXZCoubduvXWk3ukZBtjjVGf92nezfeSckOPDspiH2t4dZCLf0KgeLLnN1ZCk6MSnWZCCy";
 						try {
 							String url = "https://graph.facebook.com/v2.6/" + leadgen_id + "?access_token="
