@@ -343,14 +343,15 @@ public class HelloServlet extends HttpServlet {
     public String readFromDB(String pageId_Store_In_DB) throws URISyntaxException, SQLException {
         
         Connection connection = getConnection();
-        
+        String page_AT = null;
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT page_access_token FROM access_token where page_id='"+pageId_Store_In_DB+"'");
         while (rs.next()) {
             System.out.println("Read from DB: " + rs.getString("page_access_token"));
+            page_AT = rs.getString("page_access_token");
         }
         
-        String page_AT = rs.getString("page_access_token");
+        
         
         return page_AT;
     }
