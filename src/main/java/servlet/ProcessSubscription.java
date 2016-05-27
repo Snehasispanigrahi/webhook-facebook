@@ -243,9 +243,9 @@ public class ProcessSubscription extends HttpServlet {
         stmt.executeUpdate("INSERT INTO access_token VALUES ("+ id++ +",'"+hb_access_code2+"','"+pageId_Store_In_DB+"','"+pageAT_Store_In_DB+"',now())");
         ResultSet rs = stmt.executeQuery("SELECT * FROM access_token");
         while (rs.next()) {
-            System.out.println("Read from DB(pageId_Store_In_DB): " + rs.getString(1));
-            System.out.println("Read from DB(pageAT_Store_In_DB): " + rs.getString(2));
-            System.out.println("Read from DB(created_time): " + rs.getTimestamp(3));
+            System.out.println("Read from DB(pageId_Store_In_DB): " + rs.getString(3));
+            System.out.println("Read from DB(pageAT_Store_In_DB): " + rs.getString(4));
+            System.out.println("Read from DB(created_time): " + rs.getTimestamp(5));
         }
     }
 
