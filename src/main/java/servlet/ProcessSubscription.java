@@ -134,8 +134,8 @@ public class ProcessSubscription extends HttpServlet {
 			 */
 
 			if (requireToExpandTheToken(debugATResponse)){
-				String longLivedToken = getLongLivedToken(page_accessToken);
-				debugToken(longLivedToken);
+				page_accessToken = getLongLivedToken(page_accessToken);
+				debugToken(page_accessToken);
 			}
 		}
 		return page_accessToken;
