@@ -17,7 +17,6 @@
 				version : 'v2.6'
 			});
 			
-			function() {
 				FB.login(function(response) {
 					console.log("Successfully Loggedin", response);
 					FB.api('/me/accounts', function(response) {
@@ -39,7 +38,6 @@
 				}, {
 					scope : 'manage_pages'
 				});
-			}
 		};
 		var pageId;
 		(function(d, s, id) {
