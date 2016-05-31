@@ -86,16 +86,17 @@
 		    // for FB.getLoginStatus().
 		    if (response.status === 'connected') {
 		      // Logged into your app and Facebook.
+		      document.getElementById('status').innerHTML = "Connected";
 		      getPages();
 		    } else if (response.status === 'not_authorized') {
 		      // The person is logged into Facebook, but not your app.
-		      myFacebookLogin();
+		      /* myFacebookLogin(); */
 		      document.getElementById('status').innerHTML = 'Please log ' +
 		        'into this app.';
 		    } else {
 		      // The person is not logged into Facebook, so we're not sure if
 		      // they are logged into this app or not.
-		      myFacebookLogin();
+		      /* myFacebookLogin(); */
 		      document.getElementById('status').innerHTML = 'Please log ' +
 		        'into Facebook.';
 		      
@@ -154,7 +155,7 @@
 	  the FB.login() function when clicked.
 	-->
 
-	<fb:login-button scope="manage_pages,public_profile,email" onlogin=checkLoginState();">
+	<fb:login-button scope="manage_pages" onlogin=checkLoginState();">
 	</fb:login-button>
 
 	<div id="status">
