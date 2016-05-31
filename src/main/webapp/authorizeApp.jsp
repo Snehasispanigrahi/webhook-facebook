@@ -61,23 +61,27 @@
 		// Only works after `FB.init` is called
 		function myFacebookLogin() {
 			FB.login(function(response) {
+				if(response.status === 'connected'){
 				console.log("Successfully Loggedin", response);
-				FB.api('/me/accounts', function(response) {
-					console.log("Successfully retireved pages", response);
-					var pages = response.data;
-					var ul = document.getElementById("list");
-					for (var i = 0; len = pages.length; i++) {
-						var page = pages[i];
-						var li = document.createElement('li');
-						var a = document.createElement('a');
-						a.href = "#";
-						a.onclick = subscribeApp.bind(this, page.id,
-								page.access_token);
-						a.innerHTML = page.name;
-						li.appendChild(a);
-						ul.appendChild(li);
-					}
-				});
+					FB.api('/me/accounts', function(response) {
+						console.log("Successfully retireved pages", response);
+						var pages = response.data;
+						var ul = document.getElementById("list");
+						for (var i = 0; len = pages.length; i++) {
+							var page = pages[i];
+							var li = document.createElement('li');
+							var a = document.createElement('a');
+							a.href = "#";
+							a.onclick = subscribeApp.bind(this, page.id,
+									page.access_token);
+							a.innerHTML = page.name;
+							li.appendChild(a);
+							ul.appendChild(li);
+						}
+					});
+				} else {
+					Window.alert("Logged in failed!!")
+				}
 			}, {
 				scope : 'manage_pages'
 			});
