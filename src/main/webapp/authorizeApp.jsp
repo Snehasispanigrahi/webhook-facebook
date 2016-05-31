@@ -80,7 +80,7 @@
 						}
 					});
 				} else {
-					Window.alert("Logged in failed!!")
+					alert("Failed to login");
 				}
 			}, {
 				scope : 'manage_pages'
