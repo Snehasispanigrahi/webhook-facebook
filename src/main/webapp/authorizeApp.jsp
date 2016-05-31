@@ -139,14 +139,6 @@
 		    });
 		  }
 		
-		// Only works after `FB.init` is called
-		function myFacebookLogin() {
-			FB.login(function(response) {
-				checkLoginState();
-			}, {
-				scope : 'manage_pages'
-			});
-		}
 	</script>
 	<!-- <button onclick="myFacebookLogin()">Login with Facebook</button> -->
 	<!--
