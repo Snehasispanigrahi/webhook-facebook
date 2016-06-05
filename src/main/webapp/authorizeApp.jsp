@@ -57,7 +57,7 @@
 				}
 			});
 		}
-
+		
 		// Only works after `FB.init` is called
 		function myFacebookLogin() {
 			FB.login(function(response) {
