@@ -80,6 +80,7 @@
 						}
 					});
 				} else {
+					console.log("failed to Loggedin", response);
 					alert("Failed to login");
 				}
 			}, {
