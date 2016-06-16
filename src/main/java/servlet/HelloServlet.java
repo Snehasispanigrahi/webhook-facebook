@@ -225,9 +225,11 @@ public class HelloServlet extends HttpServlet {
 							e1.printStackTrace();
 						}
 						
-						debugToken(access_token);
+						String debugToken = debugToken(access_token);
 						
-						pullTheFormName(form_id, access_token);
+						String pullTheFormName = pullTheFormName(form_id, debugToken);
+						
+						System.out.println("got the form name: "+pullTheFormName);
 						
 //						String access_token = "EAAHZA6f5by2kBAFQRnvVn60nlQckPapZBIrZBkLTKqXoK1xcp2uYZCO2Ne2zuZB13wkGxfK6SKyEnfZAtsfDSkiY5GG5tyWG3SnXJrABWFyauDZCwVOwi9EXZCoubduvXWk3ukZBtjjVGf92nezfeSckOPDspiH2t4dZCLf0KgeLLnN1ZCk6MSnWZCCy";
 						try {
@@ -254,10 +256,12 @@ public class HelloServlet extends HttpServlet {
 
 	}
 
-	private void pullTheFormName(String form_id, String page_id) {
+	private String pullTheFormName(String form_id, String page_id) {
 		String url = "https://graph.facebook.com/v2.6/" + form_id + "?access_token=" + page_id;
 		String formName = requestUrl(url);
 		System.out.println("formName: " + formName);
+		
+		return formName;
 	}
 
 	private String debugToken(String page_accessToken) {
