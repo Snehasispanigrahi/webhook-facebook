@@ -33,8 +33,14 @@ import com.google.gson.JsonSyntaxException;
 @WebServlet(name = "HelloServlet", urlPatterns = { "/webhook" })
 public class HelloServlet extends HttpServlet {
 	
-	static String app_Secret = "b6e08769dc3d3421f9677855ba852013";
+	/*static String app_Secret = "b6e08769dc3d3421f9677855ba852013";
 	static String app_Id = "521073994746729";
+	static String app_AccessToken = "521073994746729|ZupZl-GaTXZO9cwrogu88U16NFA";*/
+	
+	
+	//test app
+	static String app_Id = "522204084633720";
+	static String app_Secret = "a14d0904a7c73b529f208193ef4fd9f3";
 	static String app_AccessToken = "521073994746729|ZupZl-GaTXZO9cwrogu88U16NFA";
 
 	/**
@@ -93,6 +99,14 @@ public class HelloServlet extends HttpServlet {
 
 				public void setLeadgen_id(String leadgen_id) {
 					this.leadgen_id = leadgen_id;
+				}
+
+				public String getForm_id() {
+					return form_id;
+				}
+
+				public void setForm_id(String form_id) {
+					this.form_id = form_id;
 				}
 			}
 		}
@@ -182,6 +196,9 @@ public class HelloServlet extends HttpServlet {
 
 					for (int i = 0; i < changes.length; i++) {
 						fbEntry.fbChanges.fbValues value = changes[i].value;
+						String form_id = value.getForm_id();
+						
+						
 						String leadgen_id = value.getLeadgen_id();
 						/*						
 						 *	before processing should we check the access token's life? If its expired only way to get is by logging in again.
@@ -234,6 +251,11 @@ public class HelloServlet extends HttpServlet {
 			System.out.println("Error: JSON is not an object");
 		}
 
+	}
+
+	private void pullTheFormName(String form_id, String page_id) {
+		String url = "https://graph.facebook.com/v2.6/" + form_id + "?access_token=" + page_id;
+		requestUrl(url);
 	}
 
 	private String debugToken(String page_accessToken) {
