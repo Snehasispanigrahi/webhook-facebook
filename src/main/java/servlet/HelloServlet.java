@@ -198,7 +198,6 @@ public class HelloServlet extends HttpServlet {
 						fbEntry.fbChanges.fbValues value = changes[i].value;
 						String form_id = value.getForm_id();
 						
-						
 						String leadgen_id = value.getLeadgen_id();
 						/*						
 						 *	before processing should we check the access token's life? If its expired only way to get is by logging in again.
@@ -228,6 +227,8 @@ public class HelloServlet extends HttpServlet {
 						
 						debugToken(access_token);
 						
+						pullTheFormName(form_id, access_token);
+						
 //						String access_token = "EAAHZA6f5by2kBAFQRnvVn60nlQckPapZBIrZBkLTKqXoK1xcp2uYZCO2Ne2zuZB13wkGxfK6SKyEnfZAtsfDSkiY5GG5tyWG3SnXJrABWFyauDZCwVOwi9EXZCoubduvXWk3ukZBtjjVGf92nezfeSckOPDspiH2t4dZCLf0KgeLLnN1ZCk6MSnWZCCy";
 						try {
 							String url = "https://graph.facebook.com/v2.6/" + leadgen_id + "?access_token="
@@ -255,7 +256,8 @@ public class HelloServlet extends HttpServlet {
 
 	private void pullTheFormName(String form_id, String page_id) {
 		String url = "https://graph.facebook.com/v2.6/" + form_id + "?access_token=" + page_id;
-		requestUrl(url);
+		String formName = requestUrl(url);
+		System.out.println("formName: " + formName);
 	}
 
 	private String debugToken(String page_accessToken) {
