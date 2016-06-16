@@ -132,7 +132,7 @@ public class HelloServlet extends HttpServlet {
 		String tokenValue = req.getParameter(token);
 		ServletOutputStream out = resp.getOutputStream();
 		// PrintWriter out = resp.getWriter();
-		if (tokenValue.equals("abc123")) {
+		if (tokenValue != null & tokenValue.equals("abc123")) {
 			out.write(challengeValue.getBytes());
 			System.out.println("challenge: " + challengeValue);
 		}
