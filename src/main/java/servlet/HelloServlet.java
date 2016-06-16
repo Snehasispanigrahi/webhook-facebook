@@ -257,9 +257,17 @@ public class HelloServlet extends HttpServlet {
 	}
 
 	private String pullTheFormName(String form_id, String page_id) {
-		String url = "https://graph.facebook.com/v2.6/" + form_id + "?access_token=" + page_id;
+		String url = "https://graph.facebook.com/v2.6/" + form_id + "?access_token=" + page_id +"&fields=name";
 		String formName = requestUrl(url);
 		System.out.println("formName: " + formName);
+
+		JsonObject jso = new JsonObject();
+		JsonParser parser = new JsonParser();
+		JsonElement jse = parser.parse(formName);
+		if(jse.isJsonObject()){
+			jso = (JsonObject) jse;
+			formName = jso.get("name").getAsString();
+		}
 		
 		return formName;
 	}
