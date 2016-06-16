@@ -34,9 +34,16 @@ public class ProcessSubscription extends HttpServlet {
 	 * @param args
 	 */
 
-	static String app_Secret = "b6e08769dc3d3421f9677855ba852013";
+	/*static String app_Secret = "b6e08769dc3d3421f9677855ba852013";
 	static String app_Id = "521073994746729";
+	static String app_AccessToken = "521073994746729|ZupZl-GaTXZO9cwrogu88U16NFA";*/
+	
+	
+	//test app
+	static String app_Id = "522204084633720";
+	static String app_Secret = "a14d0904a7c73b529f208193ef4fd9f3";
 	static String app_AccessToken = "521073994746729|ZupZl-GaTXZO9cwrogu88U16NFA";
+	
 	private static int counter = 0;
 	static String hb_access_code = "access_" + counter ;
 
@@ -87,7 +94,8 @@ public class ProcessSubscription extends HttpServlet {
 		String pageAT_Store_In_DB = debugToken(page_accessToken);
 		
 		System.out.println("We need to store page_acess_token(Long lived): "+pageAT_Store_In_DB + " & pageid: "+pageId_Store_In_DB);
-
+		//after we have all these, we need to make an entry of new hb_access_code along with a
+		
 		counter++;
 		
 		
